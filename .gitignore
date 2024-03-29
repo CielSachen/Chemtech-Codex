@@ -1,0 +1,13 @@
+# vscode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# environments
+.venv/
+
+# generated
+**/results.txt
+
+# misc
+**/.DS_Store
