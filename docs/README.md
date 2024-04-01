@@ -14,6 +14,9 @@ It includes the following topics:
     Standard Enthalpy, Standard Entropy Change / System Entropy, Entropy of The Surroundings, and Entropy of The Universe.
 
 2. **Chemical Kinetics**
+
+    First Order Reactions.
+
 3. **Chemical Equilibrium**
 
     Chemical Equilibrium Constants Using Molarities and Pressures.
