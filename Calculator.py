@@ -1,5 +1,5 @@
 from functools import reduce
-from math import fsum
+from math import fsum, log10
 from os import path, remove
 from typing import Self
 
@@ -33,13 +33,13 @@ def subscript(formula: str) -> str:
 
 
 def superscript(integers: str) -> str:
-    """Converts all the integers in a string of a chemical formula into its subscript form.
+    """Converts all the integers in a string into its subscript form.
 
     Args:
-        formula (str): The string of a formula.
+        formula (str): The string.
 
     Returns:
-        str: The string of a chemical formula with subscripts.
+        str: The string with subscripts.
     """
     # Create a translation dictionary for the integers and their superscript form.
     superscript_translation = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
@@ -390,7 +390,7 @@ class Thermochemistry:
             try:
                 # Asks the user for the temperature that the chemical reaction occurs in.
                 given_temperature = input(
-                    "Please input the temperature in Kelvins (float, int, or [press ENTER] ONLY): "
+                    "Please input the temperature in Kelvins (float, int, or [press ENTER for 298] ONLY): "
                 )
 
                 # Checks if the user gave a temperature
@@ -424,7 +424,7 @@ class Thermochemistry:
         # Writes to the file the given chemical equation.
         file.write(f"The given chemical equation:\n{self.chemical_equation}")
 
-        # Writes to the file the temperature and the table of givens.
+        # Writes to the file the given temperature and the table of givens.
         file.write("\n\nGivens:")
         file.write(f"\nTemperature: {temperature} K")
         file.write("\n" + self.givens_table.get_string())  # type: ignore
@@ -520,16 +520,16 @@ class ChemicalEquilibrium:
             # Resets the variable to allow for looping if inputted value is invalid
             successful = False
 
-            # Loops the input prompt until the user gives a valid molarity value.
+            # Loops the input prompt until the user gives a valid value.
             while not successful:
-                # Tries to prompt the user to input the molarity values.
+                # Tries to prompt the user to input the values.
                 try:
                     if formula[0].isdigit():
                         # Separates the parts of the given chemical formula into its coefficient and main.
                         coefficient = int(formula[0])
                         main_formula = formula[1:]
 
-                        # Asks the user for the molarity value and exponentiates it to the coefficient.
+                        # Asks the user for the value and exponentiates it to the coefficient.
                         given_value = float(
                             input(
                                 f'\nPlease input the {"MOLARITY (M)" if type == "c" else "PRESSURE (atm)"} of "{main_formula}" (float or int ONLY): '
@@ -537,7 +537,7 @@ class ChemicalEquilibrium:
                         )
                         value = given_value**coefficient
 
-                        # Adds the given molarity values to the table of givens
+                        # Adds the given values to the table of givens
                         self.givens_table.add_row(  # type: ignore
                             [
                                 main_formula,
@@ -550,14 +550,14 @@ class ChemicalEquilibrium:
 
                         coefficients.append(coefficient)
                     else:
-                        # Asks the user for the molarity value.
+                        # Asks the user for the value.
                         value = given_value = float(
                             input(
                                 f'\nPlease input the {"MOLARITY (M)" if type == "c" else "PRESSURE (atm)"} of "{formula}" (float or int ONLY): '
                             )
                         )
 
-                        # Adds the given molarity values to the table of givens
+                        # Adds the given values to the table of givens
                         self.givens_table.add_row(  # type: ignore
                             [
                                 formula,
@@ -586,7 +586,7 @@ class ChemicalEquilibrium:
         # Returns the list of given values and formula coefficients.
         return values, coefficients
 
-    def calculate_m_equilibrium(
+    def calculate_m(
         self: Self,
         product_molarities: list[float],
         product_moles: list[int],
@@ -609,7 +609,7 @@ class ChemicalEquilibrium:
         file = open(file_path, "a")
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
-        file.write("\n\nEquation for equilibrium constant (Kc):\nKc = [B]ᵇ / [A]ᵃ")
+        file.write("\n\nEquation for the equilibrium constant (Kc):\nKc = [B]ᵇ / [A]ᵃ")
 
         # Writes to the file the solution for calculating the equilibrium constant.
         file.write(
@@ -652,7 +652,9 @@ class ChemicalEquilibrium:
             )
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
-        file.write("\n\nEquation for equilibrium constant (Kp):\nKp = Kc(0.0821 × T)ⁿ")
+        file.write(
+            "\n\nEquation for the equilibrium constant (Kp):\nKp = Kc(0.0821 × T)ⁿ"
+        )
 
         # Writes to the file the solution for calculating the equilibrium constant.
         file.write(
@@ -681,7 +683,7 @@ class ChemicalEquilibrium:
         # Returns the calculated equilibrium constant.
         return kc, kp
 
-    def calculate_p_equilibrium(
+    def calculate_p(
         self: Self,
         product_pressures: list[float],
         product_moles: list[int],
@@ -704,7 +706,9 @@ class ChemicalEquilibrium:
         file = open(file_path, "a")
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
-        file.write("\n\nEquation for equilibrium constant (Kp):\nKp = [Pb]ᵇ / [Pa]ᵃ")
+        file.write(
+            "\n\nEquation for the equilibrium constant (Kp):\nKp = [Pb]ᵇ / [Pa]ᵃ"
+        )
 
         # Writes to the file the solution for calculating the equilibrium constant.
         file.write(
@@ -724,7 +728,7 @@ class ChemicalEquilibrium:
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
         file.write(
-            "\n\nEquation for equilibrium constant (Kc):\nKc = Kp / (0.0821 × T)ⁿ"
+            "\n\nEquation for the equilibrium constant (Kc):\nKc = Kp / (0.0821 × T)ⁿ"
         )
 
         # Writes to the file the solution for calculating the equilibrium constant.
@@ -800,6 +804,11 @@ class ChemicalEquilibrium:
             return True
 
     def calculate(self: Self) -> None:
+        """Runs the chemical equilibrium calculator.
+
+        Args:
+            self (Self): The class of the calculator.
+        """
         # Filters out the solid and liquid formulas.
         reactants = list(filter(self.is_valid, self.reactants))
         products = list(filter(self.is_valid, self.products))
@@ -854,44 +863,357 @@ class ChemicalEquilibrium:
             equilibrium_type,  # type: ignore
         )
 
-        # Writes to the file the temperature and the table of givens.
+        # Writes to the file the table of givens.
         file.write("\n\nGivens:")
         file.write("\n" + self.givens_table.get_string())  # type: ignore
 
-        # Writes to the file the required values to be calculated.
-        file.write("\n\nRequired:\nKc and Kp")
-
-        # Closes the created or opened file.
-        file.close()
-
         # Checks if the values are pressures.
         if equilibrium_type == "p":  # type: ignore
+            # Writes to the file the required values to be calculated.
+            file.write("\n\nRequired:\nKp and Kc")
+
+            # Closes the created or opened file.
+            file.close()
+
             # Calculates for the required values.
-            kc, kp = self.calculate_p_equilibrium(
+            kc, kp = self.calculate_p(
                 product_values,
                 product_moles,
                 reactant_values,
                 reactant_moles,
             )
+
+            # Opens the file where the results are contained.
+            file = open(file_path, "a+")
+
+            # Writes to the file the final answers to the required values.
+            file.write("\n\nThe FINAL ANSWERS:")
+            file.write(f"\nKp = {kp}")
+            file.write(f"\nKc = {kc}")
         else:
+            # Writes to the file the required values to be calculated.
+            file.write("\n\nRequired:\nKc and Kp")
+
+            # Closes the created or opened file.
+            file.close()
+
             # Calculates for the required values.
-            kc, kp = self.calculate_m_equilibrium(
+            kc, kp = self.calculate_m(
                 product_values,
                 product_moles,
                 reactant_values,
                 reactant_moles,
             )
 
-        # Opens the file where the results are contained.
-        file = open(file_path, "a+")
+            # Opens the file where the results are contained.
+            file = open(file_path, "a+")
 
-        # Writes to the file the final answers to the required values.
-        file.write("\n\nThe FINAL ANSWERS:")
-        file.write(f"\nKc = {kc}")
-        file.write(f"\nKp = {kp}")
+            # Writes to the file the final answers to the required values.
+            file.write("\n\nThe FINAL ANSWERS:")
+            file.write(f"\nKc = {kc}")
+            file.write(f"\nKp = {kp}")
 
         # Closes the opened file.
         file.close()
+
+        # Reopens the file where the results are contained for reading.
+        file = open(file_path, "r")
+
+        # Reads the results contained in the file.
+        file_contents = file.read()
+
+        # Prints out the results.
+        print("\n" + file_contents)
+
+        # Closes the opened file.
+        file.close()
+
+
+class AcidsAndBases:
+    def calculate_concentration(self: Self, p: float, type: str) -> float:
+        """Calculates the ion concentration of the potential.
+
+        Args:
+            self (Self): The class of the calculator.
+            p (float): The potential.
+            type (str): The type of ion concentration.
+
+        Returns:
+            float: The calculated ion concentration.
+        """
+        # Opens the file where the results are contained.
+        file = open(file_path, "a")
+
+        if type == "H":
+            # Writes to the file the equation that will be used to calculate the hydrogen ion concentration.
+            file.write("\n\nEquation for the hydrogen ion (H⁺):\n[H⁺] = 10⁻ᵖᴴ")
+
+            # Writes to the file the solution for calculating the hydrogen ion concentration.
+            file.write(f'\n\nSolution for the  hydrogen ion (H⁺) of "pH = {p}":')
+            file.write(f"\n[H⁺] = 10⁻{superscript(str(p))}")
+
+            # Calculates the hydrogen ion concentration.
+            h = p * -1
+            h = 10**h
+
+            # Writes to the file the calculated hydrogen ion concentration.
+            file.write(f"\n[H⁺] = {h} M")
+        else:
+            # Writes to the file the equation that will be used to calculate the hydroxide ion concentration.
+            file.write("\n\nEquation for the hydroxide ion (OH⁻):\n[OH⁻] = 10⁻ᵖᴼᴴ")
+
+            # Writes to the file the solution for calculating the hydroxide ion concentration.
+            file.write(f'\n\nSolution for the  hydroxide ion (OH⁻) of "pOH = {p}":')
+            file.write(f"\n[OH⁻] = 10⁻{superscript(str(p))}")
+
+            # Calculates the hydroxide ion concentration.
+            h = p * -13
+            h = 10**h
+
+            # Writes to the file the calculated hydroxide ion concentration.
+            file.write(f"\n[OH⁻] = {h} M")
+
+        # Closes the opened file.
+        file.close()
+
+        # Returns the calculated ion concentration.
+        return h
+
+    def calculate_potential(self: Self, h: float, type: str) -> float:
+        """Calculates the potential of the ion concentration.
+
+        Args:
+            self (Self): The class of the calculator.
+            h (float): The ion concentration.
+            type (str): The type of potential.
+
+        Returns:
+            float: The calculated potential.
+        """
+        # Opens the file where the results are contained.
+        file = open(file_path, "a")
+
+        if type == "H":
+            # Writes to the file the equation that will be used to calculate the potential of hydrogen ion.
+            file.write("\n\nEquation for the hydrogen ion (H⁺):\npH = -log[H⁺]")
+
+            # Writes to the file the solution for calculating the potential of hydrogen ion.
+            file.write(f'\n\nSolution for the  hydrogen ion (H⁺) of "[H⁺] = {h}":')
+            file.write(f"\npH = -log({h})")
+
+            # Calculates the potential of hydrogen ion.
+            p = log10(h) * -1
+
+            # Writes to the file the calculated potential of hydrogen ion.
+            file.write(f"\npH = {p}")
+        else:
+            # Writes to the file the equation that will be used to calculate the potential of hydroxide ion.
+            file.write("\n\nEquation for the hydroxide ion (OH⁻):\npOH = -log[OH⁻]")
+
+            # Writes to the file the solution for calculating the potential of hydroxide ion.
+            file.write(f'\n\nSolution for the  hydroxide ion (OH⁻) of "[OH⁻] = {h}":')
+            file.write(f"\npOH = -log({h})")
+
+            # Calculates the potential of hydroxide ion.
+            p = log10(h) * -1
+
+            # Writes to the file the calculated potential of hydroxide ion.
+            file.write(f"\npOH = {p}")
+
+        # Closes the opened file.
+        file.close()
+
+        # Returns the calculated potential of ion concentration.
+        return p
+
+    def convert_potential(self: Self, p: float) -> float:
+        """Converts the potential of hydrogen ion to the potential of hydroxide ion and vice-versa.
+
+        Args:
+            self (Self): The class of the calculator.
+            p (float): The potential.
+
+        Returns:
+            float: The converted potential.
+        """
+        # Calculates the other potential and returns it.
+
+        # Opens the file where the results are contained.
+        file = open(file_path, "a")
+
+        # Calculates the potential conversion.
+        p = 14 - p
+
+        # Closes the opened file.
+        file.close()
+
+        # Returns the converted potential.
+        return p
+
+    def calculate(self: Self) -> None:
+        """Runs the acids and bases calculator.
+
+        Args:
+            self (Self): The class of the calculator.
+        """
+        # Creates or opens a file to store where the results will be contained.
+        file = open(file_path, "w+")
+
+        # Resets the variable to allow for looping if inputted value is invalid
+        successful = False
+
+        # Loops the input prompt until the user gives a valid value.
+        while not successful:
+            # Asks the user what value they have.
+            required = input("\nPlease input what value you have (pH/H/pOH/OH): ")
+
+            # Checks whether the given input is a "pH" value.
+            if required == "pH":
+                # Tries to prompt the user to input the molarity values.
+                try:
+                    ph = float(input("\nPlease input the pH (float or int ONLY): "))
+
+                    # Writes to the file the given pH.
+                    file.write("Givens:")
+                    file.write(f"\npH = {ph}")
+
+                    # Closes the created or opened file.
+                    file.close()
+
+                    h = self.calculate_concentration(ph, "H")
+                    poh = self.convert_potential(ph)
+                    oh = self.calculate_concentration(poh, "OH")
+
+                    # Opens the file where the results are contained.
+                    file = open(file_path, "a+")
+
+                    # Writes to the file the final answers to the required values.
+                    file.write("\n\nThe FINAL ANSWERS:")
+                    file.write(f"\n[H⁺] = {h}")
+                    file.write(f"\npOH = {poh}")
+                    file.write(f"\n[OH⁻] = {oh}")
+
+                    # Stops the input prompt from repeating.
+                    successful = True
+                # Catches error exception for when the given value is invalid.
+                except ValueError:
+                    # Informs the user what values are valid.
+                    print("\nThe given value must be a valid float or int ONLY.")
+
+                    # Repeats the input prompt.
+                    successful = False
+            # Checks whether the given input is a "H" value.
+            elif required == "H":
+                # Tries to prompt the user to input the molarity values.
+                try:
+                    h = float(input("\nPlease input the H⁺ (float or int ONLY): "))
+
+                    # Writes to the file the given pH.
+                    file.write("Givens:")
+                    file.write(f"\n[H⁺] = {h}")
+
+                    # Closes the created or opened file.
+                    file.close()
+
+                    ph = self.calculate_potential(h, "H")
+                    poh = self.convert_potential(ph)
+                    oh = self.calculate_concentration(poh, "OH")
+
+                    # Opens the file where the results are contained.
+                    file = open(file_path, "a+")
+
+                    # Writes to the file the final answers to the required values.
+                    file.write("\n\nThe FINAL ANSWERS:")
+                    file.write(f"\npH = {ph}")
+                    file.write(f"\npOH = {poh}")
+                    file.write(f"\n[OH⁻] = {oh}")
+
+                    # Stops the input prompt from repeating.
+                    successful = True
+                # Catches error exception for when the given value is invalid.
+                except ValueError:
+                    # Informs the user what values are valid.
+                    print("\nThe given value must be a valid float or int ONLY.")
+
+                    # Repeats the input prompt.
+                    successful = False
+            # Checks whether the given input is a "pOH" value.
+            elif required == "pOH":
+                # Tries to prompt the user to input the molarity values.
+                try:
+                    poh = float(input("\nPlease input the pOH (float or int ONLY): "))
+
+                    # Writes to the file the given pH.
+                    file.write("Givens:")
+                    file.write(f"\npOH = {poh}")
+
+                    # Closes the created or opened file.
+                    file.close()
+
+                    oh = self.calculate_concentration(poh, "OH")
+                    ph = self.convert_potential(poh)
+                    h = self.calculate_concentration(ph, "H")
+
+                    # Opens the file where the results are contained.
+                    file = open(file_path, "a+")
+
+                    # Writes to the file the final answers to the required values.
+                    file.write("\n\nThe FINAL ANSWERS:")
+                    file.write(f"\n[OH⁻] = {oh}")
+                    file.write(f"\npH = {ph}")
+                    file.write(f"\n[H⁺] = {h}")
+
+                    # Stops the input prompt from repeating.
+                    successful = True
+                # Catches error exception for when the given value is invalid.
+                except ValueError:
+                    # Informs the user what values are valid.
+                    print("\nThe given value must be a valid float or int ONLY.")
+
+                    # Repeats the input prompt.
+                    successful = False
+            # Checks whether the given input is a ")H" value.
+            elif required == "OH":
+                # Tries to prompt the user to input the molarity values.
+                try:
+                    oh = float(input("\nPlease input the OH⁻ (float or int ONLY): "))
+
+                    # Writes to the file the given pH.
+                    file.write("Givens:")
+                    file.write(f"\n[OH⁻] = {oh}")
+
+                    # Closes the created or opened file.
+                    file.close()
+
+                    poh = self.calculate_potential(oh, "OH")
+                    ph = self.convert_potential(poh)
+                    h = self.calculate_concentration(ph, "H")
+
+                    # Opens the file where the results are contained.
+                    file = open(file_path, "a+")
+
+                    # Writes to the file the final answers to the required values.
+                    file.write("\n\nThe FINAL ANSWERS:")
+                    file.write(f"\npOH = {poh}")
+                    file.write(f"\npH = {ph}")
+                    file.write(f"\n[H⁺] = {h}")
+
+                    # Stops the input prompt from repeating.
+                    successful = True
+                # Catches error exception for when the given value is invalid.
+                except ValueError:
+                    # Informs the user what values are valid.
+                    print("\nThe given value must be a valid float or int ONLY.")
+
+                    # Repeats the input prompt.
+                    successful = False
+            else:
+                # Informs the user what values are valid.
+                print('\nThe given value must be either "Y" or "n" only.')
+
+                # Repeats the input prompt.
+                successful = False
+                continue
 
         # Reopens the file where the results are contained for reading.
         file = open(file_path, "r")
@@ -994,6 +1316,13 @@ Please input the corresponding integer for the General Chemistry Topic that you 
 
                 # Repeats the input prompt.
                 successful = False
+
+        # Stops the input prompt from repeating.
+        successful = True
+    # Checks whether the given input is a "4" value.
+    elif topic == "4":
+        # Runs the chemical equilibrium calculator
+        AcidsAndBases().calculate()  # type: ignore
 
         # Stops the input prompt from repeating.
         successful = True

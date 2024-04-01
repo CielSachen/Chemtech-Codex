@@ -20,6 +20,8 @@ It includes the following topics:
 
 4. **Acids and Bases**
 
+    Potential of hydrogen ions and potential of hydroxide ions.
+
 ___
 
 ## Installation
