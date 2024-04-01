@@ -186,7 +186,7 @@ class Thermochemistry:
             float: The calculated standard enthalpy.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the standard enthalpy.
         file.write(
@@ -245,7 +245,7 @@ class Thermochemistry:
             float: The calculated standard entropy change.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the standard entropy change.
         file.write(
@@ -288,7 +288,7 @@ class Thermochemistry:
             float: The calculated entropy of the surroundings.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the entropy of the surroundings.
         file.write(
@@ -329,7 +329,7 @@ class Thermochemistry:
             float: The calculated entropy of the universe.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the entropy of the universe.
         file.write(
@@ -419,7 +419,7 @@ class Thermochemistry:
         )
 
         # Creates or opens a file to store where the results will be contained.
-        file = open(file_path, "w+")
+        file = open(file_path, "w+", encoding="utf-8")
 
         # Writes to the file the given chemical equation.
         file.write(f"The given chemical equation:\n{self.chemical_equation}")
@@ -451,7 +451,7 @@ class Thermochemistry:
         )
 
         # Opens the file where the results are contained.
-        file = open(file_path, "a+")
+        file = open(file_path, "a+", encoding="utf-8")
 
         # Writes to the file the final answers to the required values.
         file.write("\n\nThe FINAL ANSWERS:")
@@ -463,7 +463,7 @@ class Thermochemistry:
         file.close()
 
         # Reopens the file where the results are contained for reading.
-        file = open(file_path, "r")
+        file = open(file_path, "r", encoding="utf-8")
 
         # Reads the results contained in the file.
         file_contents = file.read()
@@ -606,7 +606,7 @@ class ChemicalEquilibrium:
             float: The calculated equilibrium constant.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
         file.write("\n\nEquation for the equilibrium constant (Kc):\nKc = [B]ᵇ / [A]ᵃ")
@@ -703,7 +703,7 @@ class ChemicalEquilibrium:
             float: The calculated equilibrium constant.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
         file.write(
@@ -814,7 +814,7 @@ class ChemicalEquilibrium:
         products = list(filter(self.is_valid, self.products))
 
         # Creates or opens a file to store where the results will be contained.
-        file = open(file_path, "w+")
+        file = open(file_path, "w+", encoding="utf-8")
 
         # Writes to the file the given chemical equation.
         file.write(f"The given chemical equation:\n{self.chemical_equation}")
@@ -884,7 +884,7 @@ class ChemicalEquilibrium:
             )
 
             # Opens the file where the results are contained.
-            file = open(file_path, "a+")
+            file = open(file_path, "a+", encoding="utf-8")
 
             # Writes to the file the final answers to the required values.
             file.write("\n\nThe FINAL ANSWERS:")
@@ -906,7 +906,7 @@ class ChemicalEquilibrium:
             )
 
             # Opens the file where the results are contained.
-            file = open(file_path, "a+")
+            file = open(file_path, "a+", encoding="utf-8")
 
             # Writes to the file the final answers to the required values.
             file.write("\n\nThe FINAL ANSWERS:")
@@ -917,7 +917,7 @@ class ChemicalEquilibrium:
         file.close()
 
         # Reopens the file where the results are contained for reading.
-        file = open(file_path, "r")
+        file = open(file_path, "r", encoding="utf-8")
 
         # Reads the results contained in the file.
         file_contents = file.read()
@@ -942,7 +942,7 @@ class AcidsAndBases:
             float: The calculated ion concentration.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         if type == "H":
             # Writes to the file the equation that will be used to calculate the hydrogen ion concentration.
@@ -991,7 +991,7 @@ class AcidsAndBases:
             float: The calculated potential.
         """
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         if type == "H":
             # Writes to the file the equation that will be used to calculate the potential of hydrogen ion.
@@ -1039,7 +1039,7 @@ class AcidsAndBases:
         # Calculates the other potential and returns it.
 
         # Opens the file where the results are contained.
-        file = open(file_path, "a")
+        file = open(file_path, "a", encoding="utf-8")
 
         # Calculates the potential conversion.
         p = 14 - p
@@ -1057,7 +1057,7 @@ class AcidsAndBases:
             self (Self): The class of the calculator.
         """
         # Creates or opens a file to store where the results will be contained.
-        file = open(file_path, "w+")
+        file = open(file_path, "w+", encoding="utf-8")
 
         # Resets the variable to allow for looping if inputted value is invalid
         successful = False
@@ -1085,7 +1085,7 @@ class AcidsAndBases:
                     oh = self.calculate_concentration(poh, "OH")
 
                     # Opens the file where the results are contained.
-                    file = open(file_path, "a+")
+                    file = open(file_path, "a+", encoding="utf-8")
 
                     # Writes to the file the final answers to the required values.
                     file.write("\n\nThe FINAL ANSWERS:")
@@ -1120,7 +1120,7 @@ class AcidsAndBases:
                     oh = self.calculate_concentration(poh, "OH")
 
                     # Opens the file where the results are contained.
-                    file = open(file_path, "a+")
+                    file = open(file_path, "a+", encoding="utf-8")
 
                     # Writes to the file the final answers to the required values.
                     file.write("\n\nThe FINAL ANSWERS:")
@@ -1155,7 +1155,7 @@ class AcidsAndBases:
                     h = self.calculate_concentration(ph, "H")
 
                     # Opens the file where the results are contained.
-                    file = open(file_path, "a+")
+                    file = open(file_path, "a+", encoding="utf-8")
 
                     # Writes to the file the final answers to the required values.
                     file.write("\n\nThe FINAL ANSWERS:")
@@ -1190,7 +1190,7 @@ class AcidsAndBases:
                     h = self.calculate_concentration(ph, "H")
 
                     # Opens the file where the results are contained.
-                    file = open(file_path, "a+")
+                    file = open(file_path, "a+", encoding="utf-8")
 
                     # Writes to the file the final answers to the required values.
                     file.write("\n\nThe FINAL ANSWERS:")
@@ -1216,7 +1216,7 @@ class AcidsAndBases:
                 continue
 
         # Reopens the file where the results are contained for reading.
-        file = open(file_path, "r")
+        file = open(file_path, "r", encoding="utf-8")
 
         # Reads the results contained in the file.
         file_contents = file.read()
