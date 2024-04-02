@@ -471,7 +471,7 @@ def calculate_chemical_kinetics():
             f"\n\nSolution for the concentration ([A]ₜ) after {time} seconds at {temperature} °C:"
         )
         file.write(
-            f"\nln [A]{subscript(str(time))}ₛ = -({rate_constant} /s)({time} s) + ln ({initial_concentration} M)"
+            f"\nln [A]{subscript(str(round(time)))}ₛ = -({rate_constant} /s)({time} s) + ln ({initial_concentration} M)"
         )
 
         # Calculates the concentration after time.
@@ -481,7 +481,7 @@ def calculate_chemical_kinetics():
         concentration_after_time = e**concentration_after_time
 
         # Writes to the file the calculated concentration after time.
-        file.write(f"\n[A]{subscript(str(time))} = {concentration_after_time} M")
+        file.write(f"\n[A]{subscript(str(round(time)))} = {concentration_after_time} M")
 
         # Closes the opened file.
         file.close()
@@ -660,7 +660,7 @@ Please input the corresponding integer for the topic that you need this calculat
                 # Writes to the file the final answers to the required values.
                 file.write("\n\nThe FINAL ANSWERS:")
                 file.write(
-                    f"\n[A]{subscript(str(given_time))} = {concentration_after_time} M"
+                    f"\n[A]{subscript(str(round(given_time)))} = {concentration_after_time} M"
                 )
 
                 # Closes the opened file.
@@ -1220,7 +1220,7 @@ def calculate_acids_and_bases():
 
             # Writes to the file the solution for calculating the hydrogen ion concentration.
             file.write(f'\n\nSolution for the hydrogen ion (H⁺) of "pH = {p}":')
-            file.write(f"\n[H⁺] = 10⁻{superscript(str(p))}")
+            file.write(f"\n[H⁺] = 10⁻{superscript(str(round(p)))}")
 
             # Calculates the hydrogen ion concentration.
             h = p * -1
@@ -1234,7 +1234,7 @@ def calculate_acids_and_bases():
 
             # Writes to the file the solution for calculating the hydroxide ion concentration.
             file.write(f'\n\nSolution for the hydroxide ion (OH⁻) of "pOH = {p}":')
-            file.write(f"\n[OH⁻] = 10⁻{superscript(str(p))}")
+            file.write(f"\n[OH⁻] = 10⁻{superscript(str(round(p)))}")
 
             # Calculates the hydroxide ion concentration.
             h = p * -13
