@@ -1,3 +1,5 @@
+# IF YOU WILL USE THE CODE IN THIS REPOSITORY FOR YOUR OWN PERFORMANCE TASK, PLEASE FOLLOW READ THE LICENSE AND FOLLOW THE CONDITIONS
+
 # Technical Solution: Digital Technology - [Calculator Name]
 
 ## General Chemistry 2 and Empowerment Technologies Integrated Performance Task

@@ -1553,12 +1553,12 @@ while rerun:
     while not successful:
         # Gives the user the instructions for providing the topic.
         print("""
-    Please input the corresponding integer for the General Chemistry topic that you need this calculator for.
-    1.) Thermochemistry
-    2.) Chemical Kinetics
-    3.) Chemical Equilibrium
-    4.) Acids and Bases
-    """)
+Please input the corresponding integer for the General Chemistry topic that you need this calculator for.
+1.) Thermochemistry
+2.) Chemical Kinetics
+3.) Chemical Equilibrium
+4.) Acids and Bases
+""")
         # Asks the user for the topic.
         given_topic = input("Topic: ")
 
