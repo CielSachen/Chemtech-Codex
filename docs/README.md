@@ -1,11 +1,11 @@
-# IF YOU WILL USE THE CODE IN THIS REPOSITORY FOR YOUR OWN PERFORMANCE TASK, PLEASE FOLLOW READ THE LICENSE AND FOLLOW THE CONDITIONS
+***IF YOU WILL USE THE CODE IN THIS REPOSITORY FOR YOUR OWN PERFORMANCE TASK, PLEASE READ THE LICENSE AND FOLLOW THE CONDITIONS***
 
-# Technical Solution: Digital Technology - [Calculator Name]
+# Technical Solution: Digital Technology - Chemtech Codex
 
 ## General Chemistry 2 and Empowerment Technologies Integrated Performance Task
 
 ![Python Static Badge](https://img.shields.io/badge/Python-3.12.X-4584B6?style=flat-square&logo=python)
-![pip Static Badge](https://img.shields.io/badge/pip-3.x-4584B6?style=flat-square&logo=python)
+![pip Static Badge](https://img.shields.io/badge/pip-24.0-4584B6?style=flat-square&logo=python)
 
 A CLI based simple chemistry calculator that solves and integrates General Chemistry 2 concepts.
 

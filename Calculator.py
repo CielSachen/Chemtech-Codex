@@ -1228,6 +1228,22 @@ def calculate_acids_and_bases():
 
             # Writes to the file the calculated hydrogen ion concentration.
             file.write(f"\n[H⁺] = {h} M")
+
+            # Checks if the pH is greater than 7 then writes to the file that the solution is acidic.
+            if h > 0.0000001:
+                file.write(
+                    "\n\nBecause the hydrogen ion (H⁺) is greater than 1 × 10⁻⁷, the solution must be ACIDIC."
+                )
+            # Checks if the pH is less than 7 then writes to the file that the solution is basic.
+            elif h < 0.0000001:
+                file.write(
+                    "\n\nBecause the hydrogen ion (H⁺) is less than 1 × 10⁻⁷, the solution must be BASIC."
+                )
+            # Writes to the file that the solution is neutral.
+            else:
+                file.write(
+                    "\n\nBecause the hydrogen ion (H⁺) is equal to 1 × 10⁻⁷, the solution must be NEUTRAL."
+                )
         else:
             # Writes to the file the equation that will be used to calculate the hydroxide ion concentration.
             file.write("\n\nEquation for the hydroxide ion (OH⁻):\n[OH⁻] = 10⁻ᵖᴼᴴ")
@@ -1264,10 +1280,14 @@ def calculate_acids_and_bases():
 
         if type == "H":
             # Writes to the file the equation that will be used to calculate the potential of hydrogen ion.
-            file.write("\n\nEquation for the hydrogen ion (H⁺):\npH = -log[H⁺]")
+            file.write(
+                "\n\nEquation for the potential of hydrogen ion (H⁺):\npH = -log[H⁺]"
+            )
 
             # Writes to the file the solution for calculating the potential of hydrogen ion.
-            file.write(f'\n\nSolution for the hydrogen ion (H⁺) of "[H⁺] = {h}":')
+            file.write(
+                f'\n\nSolution for the potential of hydrogen ion (H⁺) of "[H⁺] = {h}":'
+            )
             file.write(f"\npH = -log({h})")
 
             # Calculates the potential of hydrogen ion.
@@ -1275,12 +1295,32 @@ def calculate_acids_and_bases():
 
             # Writes to the file the calculated potential of hydrogen ion.
             file.write(f"\npH = {p}")
+
+            # Checks if the pH is greater than 7 then writes to the file that the solution is basic.
+            if p > 7:
+                file.write(
+                    "\n\nBecause the potential of hydrogen ion (pH) is greater than 7, the solution must be BASIC."
+                )
+            # Checks if the pH is less than 7 then writes to the file that the solution is acidic.
+            elif p < 7:
+                file.write(
+                    "\n\nBecause the potential of hydrogen ion (pH) is less than 7, the solution must be ACIDIC."
+                )
+            # Writes to the file that the solution is neutral.
+            else:
+                file.write(
+                    "\n\nBecause the potential of hydrogen ion (pH) is equal to 0, the solution must be NEUTRAL."
+                )
         else:
             # Writes to the file the equation that will be used to calculate the potential of hydroxide ion.
-            file.write("\n\nEquation for the hydroxide ion (OH⁻):\npOH = -log[OH⁻]")
+            file.write(
+                "\n\nEquation for the potential of hydroxide ion (OH⁻):\npOH = -log[OH⁻]"
+            )
 
             # Writes to the file the solution for calculating the potential of hydroxide ion.
-            file.write(f'\n\nSolution for the hydroxide ion (OH⁻) of "[OH⁻] = {h}":')
+            file.write(
+                f'\n\nSolution for the potential of hydroxide ion (OH⁻) of "[OH⁻] = {h}":'
+            )
             file.write(f"\npOH = -log({h})")
 
             # Calculates the potential of hydroxide ion.
