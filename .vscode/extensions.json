@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "aaron-bond.better-comments",
     "charliermarsh.ruff",
     "ms-python.debugpy",
     "ms-python.python",

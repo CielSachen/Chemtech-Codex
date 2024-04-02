@@ -1310,10 +1310,13 @@ def calculate_acids_and_bases():
         # Opens the file where the results are contained.
         file = open(file_path, "a", encoding="utf-8")
 
-        # Writes to the file the equation that will be used to convert the potential.
-        file.write(
-            f"\n\nEquation for converting the potential:\n{type} = 14 - {"pH" if type == "pOH" else "pOH"}"
-        )
+        # Checks if the type is "pOH".
+        if type == "pOH":
+            # Writes to the file the equation that will be used to convert the potential.
+            file.write(f"\n\nEquation for converting the potential:\n{type} = 14 - pH")
+        else:
+            # Writes to the file the equation that will be used to convert the potential.
+            file.write(f"\n\nEquation for converting the potential:\n{type} = 14 - pOH")
 
         # Writes to the file the solution for convert the potential.
         file.write("\n\nSolution for converting the potential:")

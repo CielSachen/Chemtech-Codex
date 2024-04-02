@@ -4,7 +4,7 @@
 
 ## General Chemistry 2 and Empowerment Technologies Integrated Performance Task
 
-![Python Static Badge](https://img.shields.io/badge/Python-3.x-4584B6?style=flat-square&logo=python)
+![Python Static Badge](https://img.shields.io/badge/Python-3.12.X-4584B6?style=flat-square&logo=python)
 ![pip Static Badge](https://img.shields.io/badge/pip-3.x-4584B6?style=flat-square&logo=python)
 
 A CLI based simple chemistry calculator that solves and integrates General Chemistry 2 concepts.
@@ -31,14 +31,14 @@ ___
 
 ## Installation
 
-### Python 3.x
+### Python 3.12.X
 
 You can download the latest version of Python from the [official website](https://www.python.org/downloads/).
 
 For MacOS users, you can download Python through Homebrew instead:
 
 ```bash
-brew install python@3
+brew install python@3.12
 ```
 
 ### Dependencies
