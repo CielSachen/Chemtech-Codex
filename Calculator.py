@@ -1541,161 +1541,192 @@ def calculate_acids_and_bases():
             continue
 
 
-# Resets the variable to allow for looping if inputted value is invalid
-successful = False
+# Defines whether to rerun the script or not.
+rerun = True
 
-# Loops the input prompt until the user gives a valid chemical equation and temperature value.
-while not successful:
-    # Gives the user the instructions for providing the topic.
-    print("""
-Please input the corresponding integer for the General Chemistry topic that you need this calculator for.
-1.) Thermochemistry
-2.) Chemical Kinetics
-3.) Chemical Equilibrium
-4.) Acids and Bases
-""")
-    # Asks the user for the topic.
-    given_topic = input("Topic: ")
+# Keeps rerunning the script while rerun is true.
+while rerun:
+    # Resets the variable to allow for looping if inputted value is invalid
+    successful = False
 
-    # Checks whether the given input is a "1" value.
-    if given_topic == "1":
-        # Resets the variable to allow for looping if inputted value is invalid
-        successful = False
+    # Loops the input prompt until the user gives a valid chemical equation and temperature value.
+    while not successful:
+        # Gives the user the instructions for providing the topic.
+        print("""
+    Please input the corresponding integer for the General Chemistry topic that you need this calculator for.
+    1.) Thermochemistry
+    2.) Chemical Kinetics
+    3.) Chemical Equilibrium
+    4.) Acids and Bases
+    """)
+        # Asks the user for the topic.
+        given_topic = input("Topic: ")
 
-        # Loops the input prompt until the user gives a valid chemical equation.
-        while not successful:
-            # Gives the user the instructions for providing the chemical equation to use.
-            print(
-                "\nPlease input your chemical equation, this is case sensitive.\ne.g. N2 + 3H2 -> 2NH3"
-            )
-            # Asks the user for the chemical equation to use.
-            given_chemical_equation = input("\nChemical Equation: ")
+        # Checks whether the given input is a "1" value.
+        if given_topic == "1":
+            # Resets the variable to allow for looping if inputted value is invalid
+            successful = False
 
-            # Checks if the there was no chemical equation given.
-            if given_chemical_equation == "":
-                # Informs the user that they need to provide a chemical equation.
-                print("\nYou NEED provide a chemical equation.")
+            # Loops the input prompt until the user gives a valid chemical equation.
+            while not successful:
+                # Gives the user the instructions for providing the chemical equation to use.
+                print(
+                    "\nPlease input your chemical equation, this is case sensitive.\ne.g. N2 + 3H2 -> 2NH3"
+                )
+                # Asks the user for the chemical equation to use.
+                given_chemical_equation = input("\nChemical Equation: ")
 
-                # Repeats the input prompt.
-                successful = False
+                # Checks if the there was no chemical equation given.
+                if given_chemical_equation == "":
+                    # Informs the user that they need to provide a chemical equation.
+                    print("\nYou NEED provide a chemical equation.")
 
-            # Tries to run the chemical equilibrium calculator
-            try:
-                calculate_thermochemistry(given_chemical_equation)  # type: ignore
+                    # Repeats the input prompt.
+                    successful = False
 
-                # Stops the input prompt from repeating.
-                successful = True
+                # Tries to run the chemical equilibrium calculator
+                try:
+                    calculate_thermochemistry(given_chemical_equation)  # type: ignore
 
-            except IndexError:
-                # Informs the user that their chemical equation does not follow the format.
-                print("\nThe chemical equation MUST follow the necessary format.")
+                    # Stops the input prompt from repeating.
+                    successful = True
 
-                # Repeats the input prompt.
-                successful = False
+                except IndexError:
+                    # Informs the user that their chemical equation does not follow the format.
+                    print("\nThe chemical equation MUST follow the necessary format.")
 
-        # Stops the input prompt from repeating.
-        successful = True
-    # Checks whether the given input is a "2" value.
-    elif given_topic == "2":
-        # Runs the chemical kinetics calculator
-        calculate_chemical_kinetics()  # type: ignore
+                    # Repeats the input prompt.
+                    successful = False
 
-        # Stops the input prompt from repeating.
-        successful = True
-    # Checks whether the given input is a "3" value.
-    elif given_topic == "3":
-        # Resets the variable to allow for looping if inputted value is invalid
-        successful = False
+            # Stops the input prompt from repeating.
+            successful = True
+        # Checks whether the given input is a "2" value.
+        elif given_topic == "2":
+            # Runs the chemical kinetics calculator
+            calculate_chemical_kinetics()  # type: ignore
 
-        # Loops the input prompt until the user gives a valid chemical equation.
-        while not successful:
-            # Gives the user the instructions for providing the chemical equation to use.
-            print(
-                "\nPlease input your chemical equation, this is case sensitive.\ne.g. N2O4(g) <=> 2NO2(g)"
-            )
-            # Asks the user for the chemical equation to use.
-            given_chemical_equation = input("\nChemical Equation: ")
+            # Stops the input prompt from repeating.
+            successful = True
+        # Checks whether the given input is a "3" value.
+        elif given_topic == "3":
+            # Resets the variable to allow for looping if inputted value is invalid
+            successful = False
 
-            # Checks if the there was no chemical equation given.
-            if given_chemical_equation == "":
-                # Informs the user that they need to provide a chemical equation.
-                print("\nYou NEED provide a chemical equation.")
+            # Loops the input prompt until the user gives a valid chemical equation.
+            while not successful:
+                # Gives the user the instructions for providing the chemical equation to use.
+                print(
+                    "\nPlease input your chemical equation, this is case sensitive.\ne.g. N2O4(g) <=> 2NO2(g)"
+                )
+                # Asks the user for the chemical equation to use.
+                given_chemical_equation = input("\nChemical Equation: ")
 
-                # Repeats the input prompt.
-                successful = False
+                # Checks if the there was no chemical equation given.
+                if given_chemical_equation == "":
+                    # Informs the user that they need to provide a chemical equation.
+                    print("\nYou NEED provide a chemical equation.")
 
-            # Tries to run the chemical equilibrium calculator
-            try:
-                calculate_chemical_equilibrium(given_chemical_equation)  # type: ignore
+                    # Repeats the input prompt.
+                    successful = False
 
-                # Stops the input prompt from repeating.
-                successful = True
-            except IndexError:
-                # Informs the user that their chemical equation does not follow the format.
-                print("\nThe chemical equation MUST follow the necessary format.")
+                # Tries to run the chemical equilibrium calculator
+                try:
+                    calculate_chemical_equilibrium(given_chemical_equation)  # type: ignore
 
-                # Repeats the input prompt.
-                successful = False
+                    # Stops the input prompt from repeating.
+                    successful = True
+                except IndexError:
+                    # Informs the user that their chemical equation does not follow the format.
+                    print("\nThe chemical equation MUST follow the necessary format.")
 
-        # Stops the input prompt from repeating.
-        successful = True
-    # Checks whether the given input is a "4" value.
-    elif given_topic == "4":
-        # Runs the chemical equilibrium calculator
-        calculate_acids_and_bases()  # type: ignore
+                    # Repeats the input prompt.
+                    successful = False
 
-        # Stops the input prompt from repeating.
-        successful = True
-    else:
-        # Informs the user what values are valid.
-        print('\nThe given value must be "1", "2", "3", or "4" only.')
+            # Stops the input prompt from repeating.
+            successful = True
+        # Checks whether the given input is a "4" value.
+        elif given_topic == "4":
+            # Runs the chemical equilibrium calculator
+            calculate_acids_and_bases()  # type: ignore
 
-        # Repeats the input prompt.
-        successful = False
-        continue
+            # Stops the input prompt from repeating.
+            successful = True
+        else:
+            # Informs the user what values are valid.
+            print('\nThe given value must be "1", "2", "3", or "4" only.')
 
-# Reopens the file where the results are contained for reading.
-file = open(file_path, "r", encoding="utf-8")
+            # Repeats the input prompt.
+            successful = False
+            continue
 
-# Reads the results contained in the file.
-file_contents = file.read()
+    # Reopens the file where the results are contained for reading.
+    file = open(file_path, "r", encoding="utf-8")
 
-# Prints out the results.
-print("\n" + file_contents)
+    # Reads the results contained in the file.
+    file_contents = file.read()
 
-# Closes the opened file.
-file.close()
+    # Prints out the results.
+    print("\n" + file_contents)
 
-# Resets the variable to allow for looping if inputted value is invalid
-successful = False
+    # Closes the opened file.
+    file.close()
 
-# Loops the input prompt until the user gives a valid "Y" or "n" value.
-while not successful:
-    # Asks the user whether they want to keep the generated file or not.
-    delete_file = input(
-        "Do you want to keep the generated file containing the results? (Y/n): "
-    )
+    # Resets the variable to allow for looping if inputted value is invalid
+    successful = False
 
-    # Checks whether the given input is a "n" value.
-    if delete_file == "n":
-        # Deletes the generated file where the results are contained.
-        remove(file_path)
+    # Loops the input prompt until the user gives a valid "Y" or "n" value.
+    while not successful:
+        # Asks the user whether they want to keep the generated file or not.
+        delete_file = input(
+            "Do you want to keep the generated file containing the results? (Y/n): "
+        )
 
-        # Prints out a confirmation of the file's deletion.
-        print("\nThe file was successfully deleted.")
+        # Checks whether the given input is a "n" value.
+        if delete_file == "n":
+            # Deletes the generated file where the results are contained.
+            remove(file_path)
 
-        # Stops the input prompt from repeating.
-        successful = True
-    # Checks whether the given input is a "Y" value.
-    elif delete_file == "Y":
-        # Prints out the location of where the file was generated.
-        print(f"\nThe file was generated at: {path.realpath(file_path)}\n")
+            # Prints out a confirmation of the file's deletion.
+            print("\nThe file was successfully deleted.")
 
-        # Stops the input prompt from repeating.
-        successful = True
-    else:
-        # Informs the user what values are valid.
-        print('\nThe given value must be either "Y" or "n" only.')
+            # Stops the input prompt from repeating.
+            successful = True
+        # Checks whether the given input is a "Y" value.
+        elif delete_file == "Y":
+            # Prints out the location of where the file was generated.
+            print(f"\nThe file was generated at: {path.realpath(file_path)}\n")
 
-        # Repeats the input prompt.
-        successful = False
+            # Stops the input prompt from repeating.
+            successful = True
+        else:
+            # Informs the user what values are valid.
+            print('\nThe given value must be either "Y" or "n" only.')
+
+            # Repeats the input prompt.
+            successful = False
+
+    # Resets the variable to allow for looping if inputted value is invalid
+    successful = False
+
+    # Loops the input prompt until the user gives a valid "Y" or "n" value.
+    while not successful:
+        # Asks the user whether they want to rerun the script or not.
+        delete_file = input("Do you want to rerun the script? (Y/n): ")
+
+        # Checks whether the given input is a "n" value.
+        if delete_file == "n":
+            # Stops the script from rerunning.
+            rerun = False
+
+            # Stops the input prompt from repeating.
+            successful = True
+        # Checks whether the given input is a "Y" value.
+        elif delete_file == "Y":
+            # Stops the input prompt from repeating.
+            successful = True
+        else:
+            # Informs the user what values are valid.
+            print('\nThe given value must be either "Y" or "n" only.')
+
+            # Repeats the input prompt.
+            successful = False
