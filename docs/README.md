@@ -1,15 +1,13 @@
-***IF YOU WILL USE THE CODE IN THIS REPOSITORY FOR YOUR OWN PERFORMANCE TASK, PLEASE READ THE LICENSE AND FOLLOW THE CONDITIONS***
+***IF YOU WILL USE THE CODE IN THIS REPOSITORY FOR YOUR PERFORMANCE TASK, PLEASE READ THE LICENSE AND FOLLOW THE CONDITIONS***
 
-# Technical Solution: Digital Technology - Chemtech Codex
+# Chemtech Codex
 
 ## General Chemistry 2 and Empowerment Technologies Integrated Performance Task
 
 ![Python Static Badge](https://img.shields.io/badge/Python-3.12.X-4584B6?style=flat-square&logo=python)
 ![pip Static Badge](https://img.shields.io/badge/pip-24.0-4584B6?style=flat-square&logo=python)
 
-A CLI based simple chemistry calculator that solves and integrates General Chemistry 2 concepts.
-
-It includes the following topics:
+The Chemtech Codex is a simple CLI-based calculator that solves and integrates General Chemistry 2 concepts. It takes inputs from the user and uses predetermined formulas to calculate values. The following General Chemistry 2 topics are covered:
 
 1. **Thermochemistry**
 
@@ -27,18 +25,20 @@ It includes the following topics:
 
     Potential of hydrogen ions and potential of hydroxide ions.
 
-___
+_This repository does not follow conventional commit messages because it was made solely for academic purposes._
+
+---
 
 ## Installation
 
-### Python 3.12.X
+### Python 3.x
 
 You can download the latest version of Python from the [official website](https://www.python.org/downloads/).
 
 For MacOS users, you can download Python through Homebrew instead:
 
 ```bash
-brew install python@3.12
+brew install python@3
 ```
 
 ### Dependencies
@@ -72,7 +72,7 @@ The script gives you instructions throughout on what you have to input.
 ![Terminal Example](./assets/example_terminal.png)
 ![Result Example](./assets/example_result.png)
 
-___
+---
 
 ## General Chemistry Group 4 (12G)
 
