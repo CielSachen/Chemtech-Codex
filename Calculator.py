@@ -1253,7 +1253,7 @@ def calculate_acids_and_bases():
             file.write(f"\n[OH⁻] = 10⁻{superscript(str(round(p)))}")
 
             # Calculates the hydroxide ion concentration.
-            h = p * -13
+            h = p * -1
             h = 10**h
 
             # Writes to the file the calculated hydroxide ion concentration.
