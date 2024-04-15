@@ -1,6 +1,6 @@
 <img
   alt="Logo"
-  src="./assets//logo.jpg"
+  src="./assets//logo.png"
 />
 
 # Chemtech Codex
