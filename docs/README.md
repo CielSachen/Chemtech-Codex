@@ -4,8 +4,8 @@
 
 ## General Chemistry 2 and Empowerment Technologies Integrated Performance Task
 
-![Python Static Badge](https://img.shields.io/badge/Python-3.12.X-4584B6?style=flat-square&logo=python)
-![pip Static Badge](https://img.shields.io/badge/pip-24.0-4584B6?style=flat-square&logo=python)
+![Python Current](https://img.shields.io/badge/Python-%5E3.10-4584B6?style=flat-square&logo=python)
+![Package Manager](https://img.shields.io/badge/Package_Manager-pip-4584B6?style=flat-square&logo=python)
 
 The Chemtech Codex is a simple CLI-based calculator that solves and integrates General Chemistry 2 concepts. It takes inputs from the user and uses predetermined formulas to calculate values. The following General Chemistry 2 topics are covered:
 
