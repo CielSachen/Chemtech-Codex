@@ -1,8 +1,9 @@
-***IF YOU WILL USE THE CODE IN THIS REPOSITORY FOR YOUR PERFORMANCE TASK, PLEASE READ THE LICENSE AND FOLLOW THE CONDITIONS***
+<img
+  alt="Logo"
+  src="./assets//logo.jpg"
+/>
 
 # Chemtech Codex
-
-## General Chemistry 2 and Empowerment Technologies Integrated Performance Task
 
 ![Python Current](https://img.shields.io/badge/Python-%5E3.10-4584B6?style=flat-square&logo=python)
 ![Package Manager](https://img.shields.io/badge/Package_Manager-pip-4584B6?style=flat-square&logo=python)
@@ -25,7 +26,7 @@ The Chemtech Codex is a simple CLI-based calculator that solves and integrates G
 
     Potential of hydrogen ions and potential of hydroxide ions.
 
-_This repository does not follow conventional commit messages because it was made solely for academic purposes._
+*This repository does not follow conventional commit messages because it was made solely for academic purposes.*
 
 ---
 
@@ -82,3 +83,13 @@ The script gives you instructions throughout on what you have to input.
 - **Louis Raphael Villaluna Panaligan (s2018402)** *(Me)*
 - Anton Jefferson Lachica Pangilinan (s2012385)
 - Josef Benedict Aguirre Plata (s2022428)
+
+---
+
+![DLSZ Seal](https://upload.wikimedia.org/wikipedia/en/a/a0/DLSZ_Seal.png)
+
+# De La Salle Santiago Zobel School
+
+Senior HighSchool
+
+General Chemistry 2 and Empowerment Technologies
