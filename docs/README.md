@@ -90,6 +90,6 @@ The script gives you instructions throughout on what you have to input.
 
 # De La Salle Santiago Zobel School
 
-Senior HighSchool
+Senior High School (Grade 12)
 
 General Chemistry 2 and Empowerment Technologies
