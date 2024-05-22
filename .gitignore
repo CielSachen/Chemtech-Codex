@@ -1,13 +1,13 @@
-# vscode
+# Visual Studio Code
 .vscode/*
 !.vscode/extensions.json
 !.vscode/settings.json
 
-# environments
+# Python Virtual Environment
 .venv/
 
-# generated
+# Generated Output
 **/results.txt
 
-# misc
+# Miscellaneous
 **/.DS_Store
