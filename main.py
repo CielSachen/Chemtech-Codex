@@ -24,7 +24,7 @@ from prettytable import PrettyTable
 file_path = "results.txt"
 
 
-def subscript(formula: str) -> str:
+def subscript(formula: str):
     """Converts all the integers in a string of a chemical formula into its subscript form.
 
     Args:
@@ -47,7 +47,7 @@ def subscript(formula: str) -> str:
     return coefficient + main_formula
 
 
-def superscript(integers: str) -> str:
+def superscript(integers: str):
     """Converts all the integers in a string into its subscript form.
 
     Args:
@@ -66,9 +66,7 @@ def superscript(integers: str) -> str:
 def calculate_thermochemistry(raw_chemical_equation: str):
     """Runs the thermodynamics calculator."""
     # Creates a new ASCII table to store the givens.
-    givens_table = PrettyTable(
-        ["Formula", "Type", "Number", "Standard Heat (ΔH°f)", "Standard Entropy (S°)"]
-    )
+    givens_table = PrettyTable(["Formula", "Type", "Number", "Standard Heat (ΔH°f)", "Standard Entropy (S°)"])
 
     # Separates the chemical equation into its reactants and products.
     chemical_equation = raw_chemical_equation.replace(" ", "").split("->")
@@ -78,9 +76,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
     # Rejoins the reactants and products into a stylized chemical equation.
     chemical_equation = " → ".join([" + ".join(reactants), " + ".join(products)])
 
-    def get_thermodynamic_values(
-        formulas: list[str], formula_type: str
-    ) -> tuple[list[float], list[float]]:
+    def get_thermodynamic_values(formulas: list[str], formula_type: str):
         """Gets the thermodynamic values of chemical formulas through inputs from the user.
 
         Args:
@@ -111,16 +107,12 @@ def calculate_thermochemistry(raw_chemical_equation: str):
 
                         # Asks the user for the standard heat value and multiplies it to the coefficient.
                         given_standard_heat = float(
-                            input(
-                                f'\nPlease input the STANDARD HEAT (ΔH°f) of "{main_formula}" (float or int ONLY): '
-                            )
+                            input(f'\nPlease input the STANDARD HEAT (ΔH°f) of "{main_formula}" (float or int ONLY): ')
                         )
                         standard_heat = given_standard_heat * coefficient
                         # Asks the user for the standard entropy value and multiplies it to the coefficient.
                         given_standard_entropy = float(
-                            input(
-                                f'Please input the STANDARD ENTROPY (S°) of "{main_formula}" (float or int ONLY): '
-                            )
+                            input(f'Please input the STANDARD ENTROPY (S°) of "{main_formula}" (float or int ONLY): ')
                         )
                         standard_entropy = given_standard_entropy * coefficient
 
@@ -137,15 +129,11 @@ def calculate_thermochemistry(raw_chemical_equation: str):
                     else:
                         # Asks the user for the standard heat value.
                         standard_heat = given_standard_heat = float(
-                            input(
-                                f'\nPlease input the STANDARD HEAT (ΔH°f) of "{formula}" (float or int ONLY): '
-                            )
+                            input(f'\nPlease input the STANDARD HEAT (ΔH°f) of "{formula}" (float or int ONLY): ')
                         )
                         # Asks the user for the standard entropy value.
                         standard_entropy = given_standard_entropy = float(
-                            input(
-                                f'Please input the STANDARD ENTROPY (S°) of "{formula}" (float or int ONLY): '
-                            )
+                            input(f'Please input the STANDARD ENTROPY (S°) of "{formula}" (float or int ONLY): ')
                         )
 
                         # Adds the given thermodynamic values to the table of givens
@@ -168,9 +156,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
                 # Catches error exception for when the given value is invalid.
                 except ValueError:
                     # Informs the user what values are valid.
-                    print(
-                        "\nThe given thermodynamic value must be a valid float or int ONLY."
-                    )
+                    print("\nThe given thermodynamic value must be a valid float or int ONLY.")
 
                     # Repeats the input prompt.
                     successful = False
@@ -181,7 +167,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
     def calculate_rxn_enthalpy(
         product_standard_heats: list[float],
         reactant_standard_heats: list[float],
-    ) -> float:
+    ):
         """Calculates the standard enthalpy of the standard heats of the products and reactants.
 
         Args:
@@ -195,14 +181,10 @@ def calculate_thermochemistry(raw_chemical_equation: str):
         file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the standard enthalpy.
-        file.write(
-            "\n\nEquation for standard enthalpy (ΔH°rxn):\nΔH°rxn = Σ(nΔS° products) - Σ(nΔS° reactants)"
-        )
+        file.write("\n\nEquation for standard enthalpy (ΔH°rxn):\nΔH°rxn = Σ(nΔS° products) - Σ(nΔS° reactants)")
 
         # Writes to the file the solution for calculating the standard enthalpy.
-        file.write(
-            f'\n\nSolution for the standard enthalpy (ΔH°rxn) of "{chemical_equation}":'
-        )
+        file.write(f'\n\nSolution for the standard enthalpy (ΔH°rxn) of "{chemical_equation}":')
         file.write(
             f"\nΔH°rxn = ({' + '.join(map(str, product_standard_heats))}) - ({' + '.join(map(str, reactant_standard_heats))}) kJ/mol"
         )
@@ -220,9 +202,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
             )
         # Checks if the enthalpy is less than zero then writes to the file that the reaction is exothermic.
         elif standard_enthalpy < 0:
-            file.write(
-                "\n\nBecause the standard enthalpy (ΔH°rxn) is less than 0, the reaction must be EXOTHERMIC."
-            )
+            file.write("\n\nBecause the standard enthalpy (ΔH°rxn) is less than 0, the reaction must be EXOTHERMIC.")
         # Writes to the file that the reaction is neither endothermic or exothermic.
         else:
             file.write(
@@ -238,7 +218,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
     def calculate_rxn_entropy(
         product_standard_entropies: list[float],
         reactant_standard_entropies: list[float],
-    ) -> float:
+    ):
         """Calculates the standard entropy change of the standard entropies of the products and reactants.
 
         Args:
@@ -265,9 +245,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
         )
 
         # Calculates the standard entropy change.
-        standard_entropy_change = fsum(product_standard_entropies) - fsum(
-            reactant_standard_entropies
-        )
+        standard_entropy_change = fsum(product_standard_entropies) - fsum(reactant_standard_entropies)
 
         # Writes to the file the calculated standard entropy change.
         file.write(f"\nΔS°rxn = {standard_entropy_change} J/K × mol")
@@ -278,7 +256,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
         # Returns the calculated standard entropy change.
         return standard_entropy_change
 
-    def calculate_surr_entropy(system_entropy: float, temperature: float) -> float:
+    def calculate_surr_entropy(system_entropy: float, temperature: float):
         """Calculates the enthalpy of the surroundings of the system entropy and temperature.
 
         Args:
@@ -292,9 +270,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
         file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the entropy of the surroundings.
-        file.write(
-            "\n\nEquation for entropy of the surroundings (ΔS°surr):\nΔS°surr = -(ΔS°sys) / T"
-        )
+        file.write("\n\nEquation for entropy of the surroundings (ΔS°surr):\nΔS°surr = -(ΔS°sys) / T")
 
         # Writes to the file the solution for calculating the entropy of the surroundings.
         file.write(
@@ -317,7 +293,7 @@ def calculate_thermochemistry(raw_chemical_equation: str):
     def calculate_univ_entropy(
         system_entropy: float,
         surrounding_entropy: float,
-    ) -> float:
+    ):
         """Calculates the entropy of the universe of the the system entropy and entropy of the surroundings.
 
         Args:
@@ -331,17 +307,11 @@ def calculate_thermochemistry(raw_chemical_equation: str):
         file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the entropy of the universe.
-        file.write(
-            "\n\nEquation for entropy of the universe (ΔS°univ):\nΔS°univ = ΔS°sys ΔS°surr"
-        )
+        file.write("\n\nEquation for entropy of the universe (ΔS°univ):\nΔS°univ = ΔS°sys ΔS°surr")
 
         # Writes to the file the solution for calculating the entropy of the universe.
-        file.write(
-            f'\n\nSolution for the entropy of the universe (ΔS°univ) of "{chemical_equation}":'
-        )
-        file.write(
-            f"\nΔS°univ = {system_entropy} J/K × mol + {surrounding_entropy} J/K × mol"
-        )
+        file.write(f'\n\nSolution for the entropy of the universe (ΔS°univ) of "{chemical_equation}":')
+        file.write(f"\nΔS°univ = {system_entropy} J/K × mol + {surrounding_entropy} J/K × mol")
 
         # Calculates the entropy of the universe.
         universal_entropy = system_entropy + surrounding_entropy
@@ -402,12 +372,8 @@ def calculate_thermochemistry(raw_chemical_equation: str):
             successful = False
 
     # Gets the thermodynamic values of the reactants and products.
-    reactant_standard_heats, reactant_standard_entropies = get_thermodynamic_values(
-        reactants, "Reactant"
-    )
-    product_standard_heats, product_standard_entropies = get_thermodynamic_values(
-        products, "Product"
-    )
+    reactant_standard_heats, reactant_standard_entropies = get_thermodynamic_values(reactants, "Reactant")
+    product_standard_heats, product_standard_entropies = get_thermodynamic_values(products, "Product")
 
     # Creates or opens a file to store where the results will be contained.
     file = open(file_path, "w+", encoding="utf-8")
@@ -427,19 +393,13 @@ def calculate_thermochemistry(raw_chemical_equation: str):
     file.close()
 
     # Calculates for the required values.
-    standard_enthalpy = calculate_rxn_enthalpy(
-        product_standard_heats, reactant_standard_heats
-    )
-    standard_entropy_change = calculate_rxn_entropy(
-        product_standard_entropies, reactant_standard_entropies
-    )
+    standard_enthalpy = calculate_rxn_enthalpy(product_standard_heats, reactant_standard_heats)
+    standard_entropy_change = calculate_rxn_entropy(product_standard_entropies, reactant_standard_entropies)
     surrounding_entropy = calculate_surr_entropy(
         standard_entropy_change,
         temperature,
     )
-    universal_entropy = calculate_univ_entropy(
-        standard_entropy_change, surrounding_entropy
-    )
+    universal_entropy = calculate_univ_entropy(standard_entropy_change, surrounding_entropy)
 
     # Opens the file where the results are contained.
     file = open(file_path, "a+", encoding="utf-8")
@@ -483,9 +443,7 @@ def calculate_chemical_kinetics():
         )
 
         # Writes to the file the solution for calculating the concentration after time.
-        file.write(
-            f"\n\nSolution for the concentration ([A]ₜ) after {time} seconds at {temperature} °C:"
-        )
+        file.write(f"\n\nSolution for the concentration ([A]ₜ) after {time} seconds at {temperature} °C:")
         file.write(
             f"\nln [A]{subscript(str(round(time)))}ₛ = -({rate_constant} /s)({time} s) + ln ({initial_concentration} M)"
         )
@@ -510,7 +468,7 @@ def calculate_chemical_kinetics():
         rate_constant: float,
         initial_concentration: float,
         final_concentration: float,
-    ) -> float:
+    ):
         """Calculates the time to get a concentration.
 
         Args:
@@ -526,15 +484,11 @@ def calculate_chemical_kinetics():
         file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the time to get a concentration.
-        file.write(
-            f"\n\nEquation for the time (t) at {temperature} °C:\nln [A]ₜ / [A]₀ = -kt"
-        )
+        file.write(f"\n\nEquation for the time (t) at {temperature} °C:\nln [A]ₜ / [A]₀ = -kt")
 
         # Writes to the file the solution for calculating the time to get a concentration.
         file.write(f"\n\nSolution for the time (t) at {temperature} °C:")
-        file.write(
-            f"\nln {final_concentration} M / {initial_concentration} M = -({rate_constant}t)"
-        )
+        file.write(f"\nln {final_concentration} M / {initial_concentration} M = -({rate_constant}t)")
 
         # Calculates the time to get a concentration.
         time_of_concentration = log(final_concentration / initial_concentration)
@@ -550,9 +504,7 @@ def calculate_chemical_kinetics():
         # Returns the calculated time to get a concentration.
         return time_of_concentration
 
-    def calculate_half_life_of_reaction(
-        temperature: float, rate_constant: float
-    ) -> float:
+    def calculate_half_life_of_reaction(temperature: float, rate_constant: float):
         """Calculates the half-life of a reaction.
 
         Args:
@@ -566,9 +518,7 @@ def calculate_chemical_kinetics():
         file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the half-life of a reaction.
-        file.write(
-            f"\n\nEquation for the half-life (t1/2) at {temperature} °C:\nt1/2 = ln 2 / k"
-        )
+        file.write(f"\n\nEquation for the half-life (t1/2) at {temperature} °C:\nt1/2 = ln 2 / k")
 
         # Writes to the file the solution for calculating the half-life of a reaction.
         file.write(f"\n\nSolution for the time (t) at {temperature} °C:")
@@ -594,23 +544,17 @@ def calculate_chemical_kinetics():
         # Tries to prompt the user to input the time and rate constant values.
         try:
             # Asks the user for the temperature.
-            given_temperature = float(
-                input("\nPlease input the temperature in Celsius (float or int ONLY): ")
-            )
+            given_temperature = float(input("\nPlease input the temperature in Celsius (float or int ONLY): "))
 
             # Asks the user for the rate constant.
-            given_rate_constant = float(
-                input("Please input the rate constant (float or int ONLY): ")
-            )
+            given_rate_constant = float(input("Please input the rate constant (float or int ONLY): "))
 
             # Stops the input prompt from repeating.
             successful = True
         # Catches error exception for when the given value is invalid.
         except ValueError:
             # Informs the user what values are valid.
-            print(
-                "\nThe given temperature or rate constant value must be a valid float or int ONLY."
-            )
+            print("\nThe given temperature or rate constant value must be a valid float or int ONLY.")
 
             # Repeats the input prompt.
             successful = False
@@ -636,15 +580,11 @@ Please input the corresponding integer for the topic that you need this calculat
             try:
                 # Asks the user for the initial concentration
                 given_initial_concentration = float(
-                    input(
-                        "\nPlease input the initial concentration (float or int ONLY): "
-                    )
+                    input("\nPlease input the initial concentration (float or int ONLY): ")
                 )
 
                 # Asks the user for the elapsed time.
-                given_time = float(
-                    input("Please input the time in seconds (float or int ONLY): ")
-                )
+                given_time = float(input("Please input the time in seconds (float or int ONLY): "))
 
                 # Creates or opens a file to store where the results will be contained.
                 file = open(file_path, "w+", encoding="utf-8")
@@ -675,9 +615,7 @@ Please input the corresponding integer for the topic that you need this calculat
 
                 # Writes to the file the final answers to the required values.
                 file.write("\n\nThe FINAL ANSWERS:")
-                file.write(
-                    f"\n[A]{subscript(str(round(given_time)))} = {concentration_after_time} M"
-                )
+                file.write(f"\n[A]{subscript(str(round(given_time)))} = {concentration_after_time} M")
 
                 # Closes the opened file.
                 file.close()
@@ -696,15 +634,11 @@ Please input the corresponding integer for the topic that you need this calculat
             try:
                 # Asks the user for the initial concentration
                 given_initial_concentration = float(
-                    input(
-                        "\nPlease input the initial concentration (float or int ONLY): "
-                    )
+                    input("\nPlease input the initial concentration (float or int ONLY): ")
                 )
 
                 # Asks the user for the final concentration
-                given_final_concentration = float(
-                    input("Please input the final concentration (float or int ONLY): ")
-                )
+                given_final_concentration = float(input("Please input the final concentration (float or int ONLY): "))
 
                 # Creates or opens a file to store where the results will be contained.
                 file = open(file_path, "w+", encoding="utf-8")
@@ -795,9 +729,7 @@ Please input the corresponding integer for the topic that you need this calculat
 def calculate_chemical_equilibrium(raw_chemical_equation: str):
     """Runs the chemical equilibrium calculator."""
     # Creates a new ASCII table to store the givens.
-    givens_table = PrettyTable(
-        ["Formula", "Type", "Number", "Molarity (M)", "Pressure (atm)"]
-    )
+    givens_table = PrettyTable(["Formula", "Type", "Number", "Molarity (M)", "Pressure (atm)"])
 
     # Separates the chemical equation into its reactants and products.
     chemical_equation = raw_chemical_equation.replace(" ", "").split("<=>")
@@ -807,9 +739,7 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
     # Rejoins the reactants and products into a stylized chemical equation.
     chemical_equation = " ⇌ ".join([" + ".join(reactants), " + ".join(products)])
 
-    def get_values(
-        formulas: list[str], formula_type: str, type: str
-    ) -> tuple[list[float], list[int]]:
+    def get_values(formulas: list[str], formula_type: str, type: str):
         """Gets the molarity values of chemical formulas through inputs from the user.
 
         Args:
@@ -918,17 +848,13 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
         file.write("\n\nEquation for the equilibrium constant (Kc):\nKc = [B]ᵇ / [A]ᵃ")
 
         # Writes to the file the solution for calculating the equilibrium constant.
-        file.write(
-            f'\n\nSolution for the equilibrium constant (Kc) of "{chemical_equation}":'
-        )
+        file.write(f'\n\nSolution for the equilibrium constant (Kc) of "{chemical_equation}":')
         file.write(
             f"\nKc = ({' × '.join(map(str, product_molarities))}) / ({' × '.join(map(str, reactant_molarities))})"
         )
 
         # Calculates the equilibrium constant.
-        kc = reduce(lambda x, y: x * y, product_molarities) / reduce(
-            lambda x, y: x * y, reactant_molarities
-        )
+        kc = reduce(lambda x, y: x * y, product_molarities) / reduce(lambda x, y: x * y, reactant_molarities)
 
         # Writes to the file the calculated equilibrium constant.
         file.write(f"\nKc = {kc}")
@@ -943,14 +869,10 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
 
         # Checks if the equilibrium constant is greater than zero then writes to the file that forward is favored.
         if kc > 0:
-            file.write(
-                "\n\nBecause the equilibrium constant (Kc) is greater than 0, FORWARD is more favored."
-            )
+            file.write("\n\nBecause the equilibrium constant (Kc) is greater than 0, FORWARD is more favored.")
         # Checks if the equilibrium constant is less than zero then writes to the file that backward is favored.
         elif kc < 0:
-            file.write(
-                "\n\nBecause the equilibrium constant (Kc) is less than 0, BACKWARD is more favored."
-            )
+            file.write("\n\nBecause the equilibrium constant (Kc) is less than 0, BACKWARD is more favored.")
         # Writes to the file that the reaction is at equilibrium.
         else:
             file.write(
@@ -958,14 +880,10 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
             )
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
-        file.write(
-            "\n\nEquation for the equilibrium constant (Kp):\nKp = Kc(0.0821 × T)ⁿ"
-        )
+        file.write("\n\nEquation for the equilibrium constant (Kp):\nKp = Kc(0.0821 × T)ⁿ")
 
         # Writes to the file the solution for calculating the equilibrium constant.
-        file.write(
-            f'\n\nSolution for the equilibrium constant (Kp) of "{chemical_equation}":'
-        )
+        file.write(f'\n\nSolution for the equilibrium constant (Kp) of "{chemical_equation}":')
         file.write("\nT = 800 C + 273.15\nT = 1073.15 K")
         file.write(f"\nΔn = {fsum(product_moles)} - {fsum(reactant_moles)}")
 
@@ -1010,35 +928,23 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
         file = open(file_path, "a", encoding="utf-8")
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
-        file.write(
-            "\n\nEquation for the equilibrium constant (Kp):\nKp = [Pb]ᵇ / [Pa]ᵃ"
-        )
+        file.write("\n\nEquation for the equilibrium constant (Kp):\nKp = [Pb]ᵇ / [Pa]ᵃ")
 
         # Writes to the file the solution for calculating the equilibrium constant.
-        file.write(
-            f'\n\nSolution for the equilibrium constant (Kp) of "{chemical_equation}":'
-        )
-        file.write(
-            f"\nKp = ({' × '.join(map(str, product_pressures))}) / ({' × '.join(map(str, reactant_pressures))})"
-        )
+        file.write(f'\n\nSolution for the equilibrium constant (Kp) of "{chemical_equation}":')
+        file.write(f"\nKp = ({' × '.join(map(str, product_pressures))}) / ({' × '.join(map(str, reactant_pressures))})")
 
         # Calculates the equilibrium constant.
-        kp = reduce(lambda x, y: x * y, product_pressures) / reduce(
-            lambda x, y: x * y, reactant_pressures
-        )
+        kp = reduce(lambda x, y: x * y, product_pressures) / reduce(lambda x, y: x * y, reactant_pressures)
 
         # Writes to the file the calculated equilibrium constant.
         file.write(f"\nKp = {kp}")
 
         # Writes to the file the equation that will be used to calculate the equilibrium constant.
-        file.write(
-            "\n\nEquation for the equilibrium constant (Kc):\nKc = Kp / (0.0821 × T)ⁿ"
-        )
+        file.write("\n\nEquation for the equilibrium constant (Kc):\nKc = Kp / (0.0821 × T)ⁿ")
 
         # Writes to the file the solution for calculating the equilibrium constant.
-        file.write(
-            f'\n\nSolution for the equilibrium constant (Kc) of "{chemical_equation}":'
-        )
+        file.write(f'\n\nSolution for the equilibrium constant (Kc) of "{chemical_equation}":')
         file.write("\nT = 800 C + 273.15\nT = 1073.15 K")
         file.write(f"\nΔn = {fsum(product_moles)} - {fsum(reactant_moles)}")
 
@@ -1066,14 +972,10 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
 
         # Checks if the equilibrium constant is greater than zero then writes to the file that forward is favored.
         if kc > 0:
-            file.write(
-                "\n\nBecause the equilibrium constant (Kc) is greater than 0, FORWARD is more favored."
-            )
+            file.write("\n\nBecause the equilibrium constant (Kc) is greater than 0, FORWARD is more favored.")
         # Checks if the equilibrium constant is less than zero then writes to the file that backward is favored.
         elif kc < 0:
-            file.write(
-                "\n\nBecause the equilibrium constant (Kc) is less than 0, BACKWARD is more favored."
-            )
+            file.write("\n\nBecause the equilibrium constant (Kc) is less than 0, BACKWARD is more favored.")
         # Writes to the file that the reaction is at equilibrium.
         else:
             file.write(
@@ -1086,7 +988,7 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
         # Returns the calculated equilibrium constant.
         return kc, kp
 
-    def is_valid(formula: str) -> bool:
+    def is_valid(formula: str):
         """Checks whether a formula is valid or not.
 
         Args:
@@ -1122,9 +1024,7 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
     # Loops the input prompt until the user gives a valid "Y" or "n" value.
     while not successful:
         # Asks the user whether they would be using pressure or not.
-        given_equilibrium_type = input(
-            "Please input if you would be using pressure (Y/n): "
-        )
+        given_equilibrium_type = input("Please input if you would be using pressure (Y/n): ")
 
         # Checks whether the given input is a "Y" value.
         if given_equilibrium_type == "Y":
@@ -1217,7 +1117,7 @@ def calculate_chemical_equilibrium(raw_chemical_equation: str):
 def calculate_acids_and_bases():
     """Runs the acids and bases calculator."""
 
-    def calculate_concentration(p: float, type: str) -> float:
+    def calculate_concentration(p: float, type: str):
         """Calculates the ion concentration of the potential.
 
         Args:
@@ -1247,19 +1147,13 @@ def calculate_acids_and_bases():
 
             # Checks if the pH is greater than 7 then writes to the file that the solution is acidic.
             if h > 0.0000001:
-                file.write(
-                    "\n\nBecause the hydrogen ion (H⁺) is greater than 1 × 10⁻⁷, the solution must be ACIDIC."
-                )
+                file.write("\n\nBecause the hydrogen ion (H⁺) is greater than 1 × 10⁻⁷, the solution must be ACIDIC.")
             # Checks if the pH is less than 7 then writes to the file that the solution is basic.
             elif h < 0.0000001:
-                file.write(
-                    "\n\nBecause the hydrogen ion (H⁺) is less than 1 × 10⁻⁷, the solution must be BASIC."
-                )
+                file.write("\n\nBecause the hydrogen ion (H⁺) is less than 1 × 10⁻⁷, the solution must be BASIC.")
             # Writes to the file that the solution is neutral.
             else:
-                file.write(
-                    "\n\nBecause the hydrogen ion (H⁺) is equal to 1 × 10⁻⁷, the solution must be NEUTRAL."
-                )
+                file.write("\n\nBecause the hydrogen ion (H⁺) is equal to 1 × 10⁻⁷, the solution must be NEUTRAL.")
         else:
             # Writes to the file the equation that will be used to calculate the hydroxide ion concentration.
             file.write("\n\nEquation for the hydroxide ion (OH⁻):\n[OH⁻] = 10⁻ᵖᴼᴴ")
@@ -1281,7 +1175,7 @@ def calculate_acids_and_bases():
         # Returns the calculated ion concentration.
         return h
 
-    def calculate_potential(h: float, type: str) -> float:
+    def calculate_potential(h: float, type: str):
         """Calculates the potential of the ion concentration.
 
         Args:
@@ -1296,14 +1190,10 @@ def calculate_acids_and_bases():
 
         if type == "H":
             # Writes to the file the equation that will be used to calculate the potential of hydrogen ion.
-            file.write(
-                "\n\nEquation for the potential of hydrogen ion (H⁺):\npH = -log[H⁺]"
-            )
+            file.write("\n\nEquation for the potential of hydrogen ion (H⁺):\npH = -log[H⁺]")
 
             # Writes to the file the solution for calculating the potential of hydrogen ion.
-            file.write(
-                f'\n\nSolution for the potential of hydrogen ion (H⁺) of "[H⁺] = {h}":'
-            )
+            file.write(f'\n\nSolution for the potential of hydrogen ion (H⁺) of "[H⁺] = {h}":')
             file.write(f"\npH = -log({h})")
 
             # Calculates the potential of hydrogen ion.
@@ -1329,14 +1219,10 @@ def calculate_acids_and_bases():
                 )
         else:
             # Writes to the file the equation that will be used to calculate the potential of hydroxide ion.
-            file.write(
-                "\n\nEquation for the potential of hydroxide ion (OH⁻):\npOH = -log[OH⁻]"
-            )
+            file.write("\n\nEquation for the potential of hydroxide ion (OH⁻):\npOH = -log[OH⁻]")
 
             # Writes to the file the solution for calculating the potential of hydroxide ion.
-            file.write(
-                f'\n\nSolution for the potential of hydroxide ion (OH⁻) of "[OH⁻] = {h}":'
-            )
+            file.write(f'\n\nSolution for the potential of hydroxide ion (OH⁻) of "[OH⁻] = {h}":')
             file.write(f"\npOH = -log({h})")
 
             # Calculates the potential of hydroxide ion.
@@ -1351,7 +1237,7 @@ def calculate_acids_and_bases():
         # Returns the calculated potential of ion concentration.
         return p
 
-    def convert_potential(p: float, type: str) -> float:
+    def convert_potential(p: float, type: str):
         """Converts the potential of hydrogen ion to the potential of hydroxide ion and vice-versa.
 
         Args:
@@ -1636,9 +1522,7 @@ Please input the corresponding integer for the General Chemistry topic that you 
             # Loops the input prompt until the user gives a valid chemical equation.
             while not successful:
                 # Gives the user the instructions for providing the chemical equation to use.
-                print(
-                    "\nPlease input your chemical equation, this is case sensitive.\ne.g. N2 + 3H2 -> 2NH3"
-                )
+                print("\nPlease input your chemical equation, this is case sensitive.\ne.g. N2 + 3H2 -> 2NH3")
                 # Asks the user for the chemical equation to use.
                 given_chemical_equation = input("\nChemical Equation: ")
 
@@ -1681,9 +1565,7 @@ Please input the corresponding integer for the General Chemistry topic that you 
             # Loops the input prompt until the user gives a valid chemical equation.
             while not successful:
                 # Gives the user the instructions for providing the chemical equation to use.
-                print(
-                    "\nPlease input your chemical equation, this is case sensitive.\ne.g. N2O4(g) <=> 2NO2(g)"
-                )
+                print("\nPlease input your chemical equation, this is case sensitive.\ne.g. N2O4(g) <=> 2NO2(g)")
                 # Asks the user for the chemical equation to use.
                 given_chemical_equation = input("\nChemical Equation: ")
 
@@ -1743,9 +1625,7 @@ Please input the corresponding integer for the General Chemistry topic that you 
     # Loops the input prompt until the user gives a valid "Y" or "n" value.
     while not successful:
         # Asks the user whether they want to keep the generated file or not.
-        delete_file = input(
-            "Do you want to keep the generated file containing the results? (Y/n): "
-        )
+        delete_file = input("Do you want to keep the generated file containing the results? (Y/n): ")
 
         # Checks whether the given input is a "n" value.
         if delete_file == "n":

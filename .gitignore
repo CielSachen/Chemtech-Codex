@@ -1,9 +1,9 @@
 # Visual Studio Code
-.vscode/*
+.vscode/**/*
 !.vscode/extensions.json
 !.vscode/settings.json
 
-# Python Virtual Environment
+# Virtual Environment
 .venv/
 
 # Generated Output
